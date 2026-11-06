@@ -13,6 +13,11 @@
 # testing
 /coverage
 
+# Agents
+/.agents/
+/.claude/
+CLAUDE.md
+
 # next.js
 /.next/
 /out/
