@@ -1,26 +1,158 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Breakpoints: declared smallest-last so a narrower query always wins. */
+@custom-variant wide (@media (min-width: 1600px));
+@custom-variant tablet (@media (max-width: 1100px));
+@custom-variant narrow (@media (max-width: 800px));
+@custom-variant phone (@media (max-width: 600px));
+@custom-variant tiny (@media (max-width: 370px));
+@custom-variant touch (@media (hover: none));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ground: #090909;
+  --color-ink: #f2efeb;
+  --color-muted: #a09c9a;
+  --color-accent: #ef4151;
+  --color-button-red: #ca2032;
+  --color-line: #292323;
+  --font-sans: var(--font-manrope), sans-serif;
+  --font-display: var(--font-anton), Impact, sans-serif;
+  --font-hand: var(--font-caveat), cursive;
+  --spacing-gutter: var(--gutter);
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --gutter: clamp(20px, 3.8vw, 68px);
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px;
+  }
+
+  @media (max-width: 1100px) {
+    :root {
+      --gutter: 30px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    :root {
+      --gutter: 24px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    :root {
+      --gutter: 20px;
+      scroll-padding-top: 72px;
+    }
+  }
+
+  html {
+    background: var(--color-ground);
+    color: var(--color-ink);
+    font-synthesis: none;
+    line-height: normal;
+  }
+
+  body {
+    min-width: 0;
+  }
+
+  /* Film grain overlay */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: white;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a[href],
+  button,
+  summary,
+  select,
+  label[for] {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  button:active,
+  a:active {
+    filter: brightness(0.85);
+  }
+
+  button,
+  a {
+    touch-action: manipulation;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 5px;
+  }
+
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  svg {
+    flex-shrink: 0;
+    stroke-width: 1.5;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Motion toggle and reduced-motion preference switch every transition off. */
+html[data-motion="off"] {
+  scroll-behavior: auto;
+}
+
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation: none;
+  transition-duration: 0.01ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none;
+    transition-duration: 0.01ms;
+  }
 }
