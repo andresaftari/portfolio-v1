@@ -3,6 +3,9 @@ import type { Experience, ProcessStep, SideProject } from "@/types/project";
 export const LINKEDIN_URL =
   "https://www.linkedin.com/in/prasidya-pramadresana-saftari";
 export const LINKEDIN_LABEL = "linkedin.com/in/prasidya-pramadresana-saftari";
+export const EMAIL = "andresaftari@gmail.com";
+export const PHONE_LABEL = "+62 838 7099 2897";
+export const PHONE_HREF = "tel:+6283870992897";
 export const CV_PATH = "/Asset/cv/Andre_Saftari_CV.pdf";
 export const PORTRAIT_PATH = "/Asset/img/andre-portrait.png";
 

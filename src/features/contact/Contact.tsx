@@ -1,10 +1,15 @@
 "use client";
 
-import { ArrowUpRight, Linkedin, MapPin } from "lucide-react";
+import { ArrowUpRight, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { Reveal } from "@/components/ui/Reveal";
 import { eyebrow, sectionWrap } from "@/components/ui/styles";
-import { LINKEDIN_URL } from "@/constants/profile";
+import {
+  EMAIL,
+  LINKEDIN_URL,
+  PHONE_HREF,
+  PHONE_LABEL,
+} from "@/constants/profile";
 import { cn } from "@/lib/cn";
 import { ContactReel } from "./ContactReel";
 
@@ -66,6 +71,31 @@ export function Contact() {
             <Linkedin className={linkIcon} />
             <span className={linkText}>
               <small className={linkLabel}>LINKEDIN</small>Andre Saftari
+            </span>
+            <ArrowUpRight
+              size={16}
+              className="text-muted tablet:hidden phone:ml-auto phone:block"
+            />
+          </a>
+          <a
+            className={cn(linkRow, "hover:text-accent")}
+            href={`mailto:${EMAIL}`}
+          >
+            <Mail className={linkIcon} />
+            <span className={linkText}>
+              <small className={linkLabel}>EMAIL</small>
+              {EMAIL}
+            </span>
+            <ArrowUpRight
+              size={16}
+              className="text-muted tablet:hidden phone:ml-auto phone:block"
+            />
+          </a>
+          <a className={cn(linkRow, "hover:text-accent")} href={PHONE_HREF}>
+            <Phone className={linkIcon} />
+            <span className={linkText}>
+              <small className={linkLabel}>PHONE</small>
+              {PHONE_LABEL}
             </span>
             <ArrowUpRight
               size={16}
