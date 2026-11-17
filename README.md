@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Andre Saftari — Portfolio
+
+A one-page personal portfolio: hero, filterable work grid with a project dialog, about, journey and contact.
+
+Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Framer Motion and Biome.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Command                       | What it does                           |
+| ----------------------------- | -------------------------------------- |
+| `npm run dev`                 | Start the dev server                   |
+| `npm run build`               | Production build                       |
+| `npm run start`               | Serve the production build             |
+| `npm run lint`                | Biome check (lint, format, imports)    |
+| `npm run format`              | Format with Biome                      |
+| `npx tsc --noEmit`            | Type check                             |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Assets
 
-## Learn More
+Add these to `public/Asset/` before deploying. They are not in the repo yet:
 
-To learn more about Next.js, take a look at the following resources:
+- `img/andre-portrait.png`
+- `cv/Andre_Saftari_CV.pdf`
+- `img/projects/budgee.png`
+- `img/projects/stylens.png`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Project images that are missing show a "Preview not available" fallback.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```text
+src/
+├─ app/          layout, page, global styles, app-level providers
+├─ components/   ui/ (presentation only) and layout/ (header, footer, motion)
+├─ features/     hero, portfolio, project-dialog, about, journey, contact
+├─ hooks/        shared context hooks (motion, project dialog, active section)
+├─ constants/    site content as data (projects, profile, motion)
+├─ lib/          small helpers
+└─ types/        shared types
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Features never import each other; shared state goes through the hooks and providers.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Editing Content
+
+- **Projects:** add an entry to `projects` in `src/constants/projects.ts`. Its `category` must also be listed in `categories`.
+- **Profile, experience, skills and links:** `src/constants/profile.ts`.
+- **Colors, fonts and breakpoints:** theme tokens and custom variants in `src/app/globals.css`.
+
+## Branches
+
+- `main` is production. Nothing is pushed to it directly.
+- `development` is the working branch.
+- Other branches (`feat/*`, `fix/*`) merge into `development` by pull request.
+- Deploying means a `development` → `main` promote pull request.
